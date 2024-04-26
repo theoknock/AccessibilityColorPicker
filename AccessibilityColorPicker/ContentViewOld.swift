@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import Observation
 
 // Extend UIColor to include a method for inverting colors
 extension UIColor {
@@ -16,7 +17,7 @@ extension UIColor {
     }
 }
 
-struct ContentView: View {
+struct ContentViewOld: View {
     @State private var baseColor: Color = Color(uiColor: .systemBlue)
     @State private var backColor: Color = Color(uiColor: .systemTeal)
     @State private var foreColor: Color = Color(uiColor: .systemTeal)
@@ -112,8 +113,8 @@ struct ContentView: View {
 //}
 //
 // Preview
-struct ContentView_Previews: PreviewProvider {
+struct ContentViewOld_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentViewOld()
     }
 }

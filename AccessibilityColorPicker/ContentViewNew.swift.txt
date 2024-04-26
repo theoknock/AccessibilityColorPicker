@@ -1,0 +1,103 @@
+//
+//  ContentView.swift
+//  AccessibilityColorPicker
+//
+//  Created by Xcode Developer on 4/25/24.
+//
+
+import SwiftUI
+import UIKit
+import Observation
+
+struct ContentView: View {
+    @State private var baseColor: Color = Color(uiColor: .systemBlue)
+    @State private var backColor: Color = Color(uiColor: .systemTeal)
+    @State private var foreColor: Color = Color(uiColor: .systemGray6)
+    @State private var intensityColor: Color = Color(uiColor: .systemYellow)
+    @State private var intensity: Int = 100
+    @State private var colors: [Color] = [.orange, .red, .gray, .blue, .green, .purple, .pink, .orange, .red, .gray, .blue, .green]
+
+    
+    
+    var body: some View {
+        
+        
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .center), content: {
+            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                .foregroundColor(baseColor)
+            
+            ColorPicker("", selection: $baseColor).padding(.trailing)
+                .onChange(of: baseColor) { _ in
+                    // Invert the base color whenever the background color changes
+                    var hue: CGFloat = 0
+                    var saturation: CGFloat = 0
+                    var brightness: CGFloat = 0
+                    var alpha: CGFloat = 0
+                    
+                    var hueBack: CGFloat = 0
+                    var saturationBack: CGFloat = 0
+                    var brightnessBack: CGFloat = 0
+                    var alphaBack: CGFloat = 0
+                    
+                    (UIColor(baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+                    (UIColor(backColor)).getHue(&hueBack, saturation: &saturationBack, brightness: &brightnessBack, alpha: &alphaBack)
+                    backColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturationBack, brightness: brightness, alpha: alphaBack))
+                }
+            
+            Text("Base Color")
+                .foregroundColor(foreColor)
+        })
+        .safeAreaPadding()x
+        
+        ScrollView(.horizontal, content: {
+            HStack {
+                ForEach(0..<12) { index in 
+                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                        .frame(width: 100, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(intensityColor).opacity(Double(index) * (1/12) + (1/12))
+                }
+            }.safeAreaPadding()
+        })
+        .frame(height: 100)
+        .safeAreaPadding()
+        
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .center), content: {
+            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                .foregroundColor(backColor)
+            
+            
+
+            
+            
+            
+            
+            Text("Background Intensity")
+                .foregroundColor(foreColor)
+        })
+        .safeAreaPadding()
+        
+        Stepper {
+            Text("Value: \(intensity)")
+            
+        } onIncrement: {
+            incrementStep()
+        } onDecrement: {
+            decrementStep()
+        }
+    }
+    
+    func incrementStep() {
+        intensity += 1
+        if intensity >= colors.count { intensity = 0 }
+    }
+    
+    
+    func decrementStep() {
+        intensity -= 1
+        if intensity < 0 { intensity = colors.count - 1 }
+    }
+}
+
+#Preview {
+    ContentView()
+}
