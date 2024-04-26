@@ -10,7 +10,8 @@ import UIKit
 import Observation
 
 struct ContentView: View {
-    @State private var baseColor: Color = Color(uiColor: .systemBlue)
+    @EnvironmentObject var viewModel: SharedViewModel
+    //    @State private var baseColor: Color = Color(uiColor: .systemBlue)
     var intensity: [String] = ["25","50","100","200","300","400", "500","600","700","800","900","950"]
     
     
@@ -18,60 +19,72 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+            Group {
                 RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(baseColor)
-                    .frame(height: UIScreen.main.bounds.size.height * 0.333)
+                    .foregroundColor(viewModel.baseColor)
+                    .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
                 //            .safeAreaPadding()
                 
-                ColorPicker("", selection: $baseColor).padding(.trailing)
-                    .padding(.vertical)
-            })
-            .safeAreaPadding()
-            ScrollView {
-                ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index)
-                }.frame(height: UIScreen.main.bounds.size.height).safeAreaPadding()
-            }.padding(.vertical)
-                
-                    ScrollView {
-                        ForEach(0..<intensity.count, id: \.self) { index in
-                            intensityView(index: index)
-                        }.frame(height: UIScreen.main.bounds.size.height).safeAreaPadding()
-                    }.padding(.vertical)
-                
-                    ScrollView {
-                        ForEach(0..<intensity.count, id: \.self) { index in
-                            intensityView(index: index)
-                        }.frame(height: UIScreen.main.bounds.size.height).safeAreaPadding()
-                    }.padding(.vertical)
-            
-            //            ScrollView(.vertical, content: {
-            //                VStack {
-            //                    ForEach(0..<12) { index in
-            //                        ZStack {
-            //                            RoundedRectangle(cornerRadius: 12.0)
-            //                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.width / 12)
-            //                                .foregroundColor(baseColor).opacity(Double(index) * (1/12) + (1/12))
-            //                            Text("\(intensity[index])")
-            //                                .foregroundColor(baseColor) // Ensure baseColor is defined elsewhere as a Color
-            //                                .opacity(1.0 - (Double(index) * (1.0 / 12) + (1.0 / 12)))
-            //                        }
-            //                    }
-            //                }.safeAreaPadding()
-            //            })
-            //            .frame(height: UIScreen.main.bounds.size.height)
-            //            .safeAreaPadding()
+                ColorPicker("", selection: $viewModel.baseColor)
+            }
         }
+        
+        Group {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(0..<intensity.count, id: \.self) { index in
+                        intensityView(index: index)
+                            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                    }
+                }
+            }
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(0..<intensity.count, id: \.self) { index in
+                        intensityView(index: index)
+                            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                    }
+                }
+            }
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(0..<intensity.count, id: \.self) { index in
+                        intensityView(index: index)
+                            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                    }
+                }
+            }
+        }.frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 12)
+        
+        //            ScrollView(.vertical, content: {
+        //                VStack {
+        //                    ForEach(0..<12) { index in
+        //                        ZStack {
+        //                            RoundedRectangle(cornerRadius: 12.0)
+        //                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.width / 12)
+        //                                .foregroundColor(baseColor).opacity(Double(index) * (1/12) + (1/12))
+        //                            Text("\(intensity[index])")
+        //                                .foregroundColor(baseColor) // Ensure baseColor is defined elsewhere as a Color
+        //                                .opacity(1.0 - (Double(index) * (1.0 / 12) + (1.0 / 12)))
+        //                        }
+        //                    }
+        //                }.safeAreaPadding()
+        //            })
+        //            .frame(height: UIScreen.main.bounds.size.height)
+        //            .safeAreaPadding()
     }
+    
+    
     @ViewBuilder
     private func intensityView(index: Int) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 12.0)
                 .foregroundColor(backgroundColorForIndex(12-index))
             VStack {
-                Text(intensity[index])
-                    .foregroundColor(textColorForIndex(index))
+                //            Text(String("\(index)")
+                //                .foregroundColor(textColorForIndex(index))
                 Text(hslToHex(hsl: textColorForIndex(index)))
                     .foregroundColor(textColorForIndex(index))
             }.frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.width / 12)
@@ -100,7 +113,7 @@ struct ContentView: View {
         // Return the hexadecimal color string
         return hexColor
     }
-
+    
     
     private func backgroundColorForIndex(_ index: Int) -> Color {
         var hue: CGFloat = 0
@@ -109,7 +122,7 @@ struct ContentView: View {
         var alpha: CGFloat = 0
         var newColor: Color
         
-        (UIColor(baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        (UIColor(viewModel.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
         return newColor
     }
@@ -135,7 +148,7 @@ struct ContentView: View {
             }
         }()
         
-        (UIColor(baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        (UIColor(viewModel.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: (brightness + (Double(12 - index) / 12)), alpha: alpha))
         return newColor
     }
