@@ -10,6 +10,8 @@
 		B93EA65D2BDC7FCB00992493 /* ObservedColorValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */; };
 		B93EA65F2BDC80CF00992493 /* ObservableColorValueSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */; };
 		B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */; };
+		B93EA6652BDD293A00992493 /* ContentViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6642BDD293A00992493 /* ContentViewNew.swift */; };
+		B93EA6662BDD2B0900992493 /* ContentViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA18492BDA3AAB008A6E10 /* ContentViewOld.swift */; };
 		B9BAE1CC2BDAB82200879B66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BAE1CB2BDAB82200879B66 /* ContentView.swift */; };
 		B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */; };
 		B9DA184C2BDA3AAC008A6E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */; };
@@ -21,6 +23,7 @@
 		B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedColorValuesView.swift; sourceTree = "<group>"; };
 		B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ObservableColorValueSliderView.swift; path = AccessibilityColorPicker/ObservableColorValueSliderView.swift; sourceTree = "<group>"; };
 		B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableColorValues.swift; sourceTree = "<group>"; };
+		B93EA6642BDD293A00992493 /* ContentViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewNew.swift; sourceTree = "<group>"; };
 		B9BAE1CB2BDAB82200879B66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B9BAE1CD2BDB6E8F00879B66 /* HSLSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLSliderView.swift; sourceTree = "<group>"; };
 		B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessibilityColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +50,7 @@
 				B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */,
 				B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */,
 				B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */,
+				B9DA18492BDA3AAB008A6E10 /* ContentViewOld.swift */,
 				B9DA18462BDA3AAB008A6E10 /* AccessibilityColorPicker */,
 				B9DA18452BDA3AAB008A6E10 /* Products */,
 			);
@@ -63,9 +67,9 @@
 		B9DA18462BDA3AAB008A6E10 /* AccessibilityColorPicker */ = {
 			isa = PBXGroup;
 			children = (
-				B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */,
-				B9DA18492BDA3AAB008A6E10 /* ContentViewOld.swift */,
 				B9BAE1CB2BDAB82200879B66 /* ContentView.swift */,
+				B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */,
+				B93EA6642BDD293A00992493 /* ContentViewNew.swift */,
 				B93EA6582BDC6EBA00992493 /* CustomSliderView.swift */,
 				B9BAE1CD2BDB6E8F00879B66 /* HSLSliderView.swift */,
 				B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */,
@@ -155,6 +159,8 @@
 				B93EA65F2BDC80CF00992493 /* ObservableColorValueSliderView.swift in Sources */,
 				B93EA65D2BDC7FCB00992493 /* ObservedColorValuesView.swift in Sources */,
 				B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */,
+				B93EA6662BDD2B0900992493 /* ContentViewOld.swift in Sources */,
+				B93EA6652BDD293A00992493 /* ContentViewNew.swift in Sources */,
 				B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */,
 				B9BAE1CC2BDAB82200879B66 /* ContentView.swift in Sources */,
 			);

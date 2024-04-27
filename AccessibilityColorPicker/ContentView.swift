@@ -16,85 +16,96 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                VStack {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(UIColor(hue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
-                                    Color(UIColor(hue: 0.333, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
-                                    Color(UIColor(hue: 0.667, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
-                                    Color(UIColor(hue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0))
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).frame(height: 30).safeAreaPadding()
-                        
-                        ObservableColorValueSliderView(value: $colors.hue)
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(UIColor(hue: colors.hue, saturation: 0.0, brightness: colors.brightness, alpha: 1.0)),
-                                    Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: colors.brightness, alpha: 1.0))
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).frame(height: 30, alignment: .center).safeAreaPadding()
-                        
-                        ObservableColorValueSliderView(value: $colors.saturation)
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 0.0, alpha: 1.0)),
-                                    Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 1.0, alpha: 1.0))
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).frame(height: 30, alignment: .center).safeAreaPadding()
-                        
-                        ObservableColorValueSliderView(value: $colors.brightness)
-                    }
-                }.frame(maxWidth: UIScreen.main.bounds.width)
+            //
+            HStack(alignment: .center, content: {
                 
+                // Column 1: Sliders
+                VStack {
+                    Group {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color(UIColor(hue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
+                                        Color(UIColor(hue: 0.333, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
+                                        Color(UIColor(hue: 0.667, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
+                                        Color(UIColor(hue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0))
+                                    ]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )).frame(height: 30).safeAreaPadding()
+                            
+                            ObservableColorValueSliderView(value: $colors.hue)
+                        }
+                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color(UIColor(hue: colors.hue, saturation: 0.0, brightness: colors.brightness, alpha: 1.0)),
+                                        Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: colors.brightness, alpha: 1.0))
+                                    ]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )).frame(height: 30, alignment: .top).safeAreaPadding()
+                            
+                            ObservableColorValueSliderView(value: $colors.saturation)
+                        }
+                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 0.0, alpha: 1.0)),
+                                        Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 1.0, alpha: 1.0))
+                                    ]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )).frame(height: 30, alignment: .center).safeAreaPadding()
+                            
+                            ObservableColorValueSliderView(value: $colors.brightness)
+                        }
+                    }
+                }.frame(width: UIScreen.main.bounds.width)
+                
+                // Column 2: RoundedRectangle
                 ZStack {
-                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(colors.baseColor)
-                        .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
-                }.frame(width: UIScreen.main.bounds.size.width / 6, height: UIScreen.main.bounds.size.height / 6)
-            }
-        }
-        
-        Group {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(0..<intensity.count, id: \.self) { index in
-                        intensityView(index: index)
-                            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: colors.brightness, alpha: 1.0)))
+                        .frame(width: 30)
+                }
+                
+                // Column 3: TextFields
+                ObservedColorValuesView()
+                
+            })
+            .safeAreaPadding()
+            
+            Group {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(0..<intensity.count, id: \.self) { index in
+                            intensityView(index: index)
+                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                        }
                     }
                 }
-            }
-            
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(0..<intensity.count, id: \.self) { index in
-                        intensityView(index: index)
-                            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(0..<intensity.count, id: \.self) { index in
+                            intensityView(index: index)
+                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                        }
                     }
                 }
-            }
-            
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(0..<intensity.count, id: \.self) { index in
-                        intensityView(index: index)
-                            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(0..<intensity.count, id: \.self) { index in
+                            intensityView(index: index)
+                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+                        }
                     }
                 }
             }

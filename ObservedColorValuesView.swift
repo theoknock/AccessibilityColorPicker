@@ -12,12 +12,14 @@ struct ObservedColorValuesView: View {
     @State private var colors = ObservableColorValues()
     
     var body: some View {
-        VStack {
-            Text("ObservedColorValuesView.colors.hue = \(colors.hue)")
-            Text("ObservedColorValuesView.colors.saturation = \(colors.saturation)")
-            Text("ObservedColorValuesView.colors.brightness = \(colors.brightness)")
-            ObservableColorValueSliderView(value: $colors.hue)
-        }
+        VStack(alignment: .leading, content: {
+            Group {
+                Text("H \(String(format: "%.2f", colors.hue))")
+                Text("S \(String(format: "%.2f", colors.saturation))")
+                Text("B \(String(format: "%.2f", colors.brightness))")
+            }
+            .font(.caption)
+        })
     }
 }
 
