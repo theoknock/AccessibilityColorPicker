@@ -37,9 +37,8 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(LinearGradient(
                         gradient: Gradient(colors: [
-                            Color(UIColor(white: 0.0, alpha: 1.0)),
-                                  Color(UIColor(white: 0.333, alpha: 1.0)),
-                            Color(UIColor(white: 1.0, alpha: 1.0))
+                            Color(UIColor(hue: colors.hue, saturation: 0.0, brightness: colors.brightness, alpha: 1.0)),
+                            Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: colors.brightness, alpha: 1.0))
                         ]),
                         startPoint: .leading,
                         endPoint: .trailing
@@ -53,9 +52,8 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(LinearGradient(
                         gradient: Gradient(colors: [
-                            Color(UIColor(white: 0.0, alpha: 1.0)),
-                                  Color(UIColor(white: 0.333, alpha: 1.0)),
-                            Color(UIColor(white: 1.0, alpha: 1.0))
+                            Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 0.0, alpha: 1.0)),
+                            Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 1.0, alpha: 1.0))
                         ]),
                         startPoint: .leading,
                         endPoint: .trailing
@@ -177,18 +175,18 @@ struct ContentView: View {
         var alpha: CGFloat = 0
         var newColor: Color
         
-//        let newIndex: Int = {
-//            switch index {
-//            case 5:
-//                return 0
-//            case 6:
-//                return 1
-//            case 7:
-//                return 11
-//            default:
-//                return index
-//            }
-//        }()
+        //        let newIndex: Int = {
+        //            switch index {
+        //            case 5:
+        //                return 0
+        //            case 6:
+        //                return 1
+        //            case 7:
+        //                return 11
+        //            default:
+        //                return index
+        //            }
+        //        }()
         
         (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: (brightness + (Double(12 - index) / 12)), alpha: alpha))
