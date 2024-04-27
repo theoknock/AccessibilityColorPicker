@@ -204,9 +204,9 @@ struct ContentView: View {
         let newColor: Color = {
             switch mode {
             case 0:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha))
             case 1:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: pow(saturation * (Double(index) / 12), (1.0/saturation)), brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+                return Color.init(uiColor: UIColor(hue: hue, saturation: pow(saturation * (Double(index) / 12), (1.0/saturation)), brightness: brightness, alpha: alpha))
             case 2:
                 return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
             default:
