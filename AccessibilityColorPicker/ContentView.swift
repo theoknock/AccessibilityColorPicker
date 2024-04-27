@@ -85,7 +85,7 @@ struct ContentView: View {
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 0, content: {
                 ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index, value: 1)
+                    intensityView(index: index, mode: 0)
                         .scaledToFill()
                     //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
                     //                                .scaledToFit()
@@ -97,7 +97,7 @@ struct ContentView: View {
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 0, content: {
                 ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index, value: 1)
+                    intensityView(index: index, mode: 1)
                         .scaledToFill()
                     //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
                     //                                .scaledToFit()
@@ -108,7 +108,7 @@ struct ContentView: View {
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 0, content: {
                 ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index, value: 1)
+                    intensityView(index: index, mode: 2)
                         .scaledToFill()
                     //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
                     //                                .scaledToFit()
@@ -134,16 +134,16 @@ struct ContentView: View {
     
     
     @ViewBuilder
-    private func intensityView(index: Int, value: Int) -> some View {
+    private func intensityView(index: Int, mode: Int) -> some View {
 //        ZStack {
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0, content: {
                 UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 12)
-                    .foregroundColor(backgroundColorForIndex(12-index))
+                    .foregroundColor(backgroundColorForIndex((mode == 1 || mode == 2) ? index : (12 - index), mode: mode))
                 
                 UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 12, bottomTrailingRadius: 12, topTrailingRadius: 0)
                     .foregroundColor(.white)
                     .overlay {
-                        Text(hslToHex(hsl: textColorForIndex(index)))
+                        Text(hslToHex(hsl: backgroundColorForIndex((mode == 1 || mode == 2) ? index : (12 - index), mode: mode)))
                             .font(.footnote)
                             .foregroundColor(textColorForIndex(index))
 //                            .padding(.horizontal)
@@ -192,15 +192,28 @@ struct ContentView: View {
     }
     
     
-    private func backgroundColorForIndex(_ index: Int) -> Color {
+    private func backgroundColorForIndex(_ index: Int, mode: Int) -> Color {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         var alpha: CGFloat = 0
-        var newColor: Color
+//        var newColor: Color
         
         (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+        
+        let newColor: Color = {
+            switch mode {
+            case 0:
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+            case 1:
+                return Color.init(uiColor: UIColor(hue: hue, saturation: pow(saturation * (Double(index) / 12), (1.0/saturation)), brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+            case 2:
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+            default:
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+            }
+        }()
+        
         return newColor
     }
     
