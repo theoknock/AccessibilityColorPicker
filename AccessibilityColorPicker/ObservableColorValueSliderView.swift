@@ -60,6 +60,5 @@ struct ObservableColorValueSliderView: View {
     
     var body: some View {
         Slider(value: $value, in: 0.0 ... 1.0)
-            .safeAreaPadding()
     }
 }
