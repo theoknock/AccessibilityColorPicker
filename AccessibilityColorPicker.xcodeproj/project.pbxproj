@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B93EA65D2BDC7FCB00992493 /* ObservedColorValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */; };
+		B93EA65F2BDC80CF00992493 /* ObservableColorValueSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */; };
+		B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */; };
 		B9BAE1CC2BDAB82200879B66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BAE1CB2BDAB82200879B66 /* ContentView.swift */; };
-		B9BAE1CE2BDB6E8F00879B66 /* CustomSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BAE1CD2BDB6E8F00879B66 /* CustomSliderView.swift */; };
 		B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */; };
-		B9DA184A2BDA3AAB008A6E10 /* ContentViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA18492BDA3AAB008A6E10 /* ContentViewOld.swift */; };
 		B9DA184C2BDA3AAC008A6E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */; };
 		B9DA184F2BDA3AAC008A6E10 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184E2BDA3AAC008A6E10 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B93EA6582BDC6EBA00992493 /* CustomSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSliderView.swift; sourceTree = "<group>"; };
+		B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedColorValuesView.swift; sourceTree = "<group>"; };
+		B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ObservableColorValueSliderView.swift; path = AccessibilityColorPicker/ObservableColorValueSliderView.swift; sourceTree = "<group>"; };
+		B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableColorValues.swift; sourceTree = "<group>"; };
 		B9BAE1CB2BDAB82200879B66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B9BAE1CD2BDB6E8F00879B66 /* CustomSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSliderView.swift; sourceTree = "<group>"; };
+		B9BAE1CD2BDB6E8F00879B66 /* HSLSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLSliderView.swift; sourceTree = "<group>"; };
 		B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessibilityColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityColorPickerApp.swift; sourceTree = "<group>"; };
 		B9DA18492BDA3AAB008A6E10 /* ContentViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewOld.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -39,7 +44,9 @@
 		B9DA183B2BDA3AAB008A6E10 = {
 			isa = PBXGroup;
 			children = (
-				B9BAE1CD2BDB6E8F00879B66 /* CustomSliderView.swift */,
+				B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */,
+				B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */,
+				B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */,
 				B9DA18462BDA3AAB008A6E10 /* AccessibilityColorPicker */,
 				B9DA18452BDA3AAB008A6E10 /* Products */,
 			);
@@ -59,6 +66,8 @@
 				B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */,
 				B9DA18492BDA3AAB008A6E10 /* ContentViewOld.swift */,
 				B9BAE1CB2BDAB82200879B66 /* ContentView.swift */,
+				B93EA6582BDC6EBA00992493 /* CustomSliderView.swift */,
+				B9BAE1CD2BDB6E8F00879B66 /* HSLSliderView.swift */,
 				B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */,
 				B9DA184D2BDA3AAC008A6E10 /* Preview Content */,
 			);
@@ -143,9 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9DA184A2BDA3AAB008A6E10 /* ContentViewOld.swift in Sources */,
+				B93EA65F2BDC80CF00992493 /* ObservableColorValueSliderView.swift in Sources */,
+				B93EA65D2BDC7FCB00992493 /* ObservedColorValuesView.swift in Sources */,
 				B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */,
-				B9BAE1CE2BDB6E8F00879B66 /* CustomSliderView.swift in Sources */,
+				B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */,
 				B9BAE1CC2BDAB82200879B66 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

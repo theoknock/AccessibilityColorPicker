@@ -10,23 +10,66 @@ import UIKit
 import Observation
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: SharedViewModel
+    @State private var colors = ObservableColorValues()
     //    @State private var baseColor: Color = Color(uiColor: .systemBlue)
     var intensity: [String] = ["25","50","100","200","300","400", "500","600","700","800","900","950"]
     
-    
-    
     var body: some View {
-        
         VStack {
-            Group {
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(viewModel.baseColor)
-                    .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
-                //            .safeAreaPadding()
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(UIColor(hue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
+                            Color(UIColor(hue: 0.333, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
+                            Color(UIColor(hue: 0.667, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
+                            Color(UIColor(hue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0))
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    ))
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 30)
                 
-                ColorPicker("", selection: $viewModel.baseColor)
+                ObservableColorValueSliderView(value: $colors.hue)
             }
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(UIColor(white: 0.0, alpha: 1.0)),
+                                  Color(UIColor(white: 0.333, alpha: 1.0)),
+                            Color(UIColor(white: 1.0, alpha: 1.0))
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    ))
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 30)
+                
+                ObservableColorValueSliderView(value: $colors.saturation)
+            }
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(UIColor(white: 0.0, alpha: 1.0)),
+                                  Color(UIColor(white: 0.333, alpha: 1.0)),
+                            Color(UIColor(white: 1.0, alpha: 1.0))
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    ))
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 30)
+                
+                ObservableColorValueSliderView(value: $colors.brightness)
+            }
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(colors.baseColor)
+                    .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
+            }.frame(width: UIScreen.main.bounds.size.width / 6, height: UIScreen.main.bounds.size.height / 6)
         }
         
         Group {
@@ -56,7 +99,7 @@ struct ContentView: View {
                     }
                 }
             }
-        }.frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 12)
+        }.frame(maxWidth: UIScreen.main.bounds.size.width, maxHeight: (UIScreen.main.bounds.size.height / 2))
         
         //            ScrollView(.vertical, content: {
         //                VStack {
@@ -122,11 +165,10 @@ struct ContentView: View {
         var alpha: CGFloat = 0
         var newColor: Color
         
-        (UIColor(viewModel.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
         return newColor
     }
-    
     
     private func textColorForIndex(_ index: Int) -> Color {
         var hue: CGFloat = 0
@@ -135,20 +177,20 @@ struct ContentView: View {
         var alpha: CGFloat = 0
         var newColor: Color
         
-        let newIndex: Int = {
-            switch index {
-            case 5:
-                return 0
-            case 6:
-                return 1
-            case 7:
-                return 11
-            default:
-                return index
-            }
-        }()
+//        let newIndex: Int = {
+//            switch index {
+//            case 5:
+//                return 0
+//            case 6:
+//                return 1
+//            case 7:
+//                return 11
+//            default:
+//                return index
+//            }
+//        }()
         
-        (UIColor(viewModel.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: (brightness + (Double(12 - index) / 12)), alpha: alpha))
         return newColor
     }

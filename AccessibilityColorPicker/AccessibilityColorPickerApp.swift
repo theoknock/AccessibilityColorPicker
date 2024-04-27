@@ -6,19 +6,28 @@
 //
 
 import SwiftUI
+import Observation
+import Combine
 
-class SharedViewModel: ObservableObject {
-    @Published var baseColor: Color = Color(uiColor: .systemTeal)
+@Observable
+class Colors {
+    var hue: Double = Double(0.5)
+    var saturation: Double = Double(1.0)
+    var brightness: Double = Double(1.0)
+    
+    var baseColor: Color {
+        Color(hue: hue, saturation: saturation, brightness: brightness)
+    }
 }
+
 
 @main
 struct AccessibilityColorPickerApp: App {
-    var viewModel = SharedViewModel()
+    @State private var colors = Colors()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(viewModel)
         }
     }
 }

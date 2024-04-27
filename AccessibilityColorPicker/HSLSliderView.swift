@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct CustomUISlider: UIViewRepresentable {
+struct CustomColorSlider: UIViewRepresentable {
     @Binding var value: Double
     var range: ClosedRange<Double>
     
@@ -40,9 +40,9 @@ struct CustomUISlider: UIViewRepresentable {
     }
     
     class Coordinator: NSObject {
-        var parent: CustomUISlider
+        var parent: CustomColorSlider
         
-        init(_ parent: CustomUISlider) {
+        init(_ parent: CustomColorSlider) {
             self.parent = parent
         }
         
@@ -52,7 +52,7 @@ struct CustomUISlider: UIViewRepresentable {
     }
 }
 
-struct CustomSliderView: View {
+struct HSLSliderView: View {
     @State private var circleHeight: Double = 207.0 // State to store the circle height
     @State private var hue: Double = 0.6
     @State private var saturation: Double = 1.0
@@ -72,7 +72,7 @@ struct CustomSliderView: View {
                 ))
                 .frame(width: UIScreen.main.bounds.size.width * 0.9, height: 30)
             
-            CustomUISlider(value: $hue, range: 0.0 ... 1.0)
+            CustomColorSlider(value: $hue, range: 0.0 ... 1.0)
         }
         .frame(width: UIScreen.main.bounds.size.width, height: 30)
         .padding(.horizontal)
@@ -89,7 +89,7 @@ struct CustomSliderView: View {
                 ))
                 .frame(width: UIScreen.main.bounds.size.width * 0.9, height: 30)
             
-            CustomUISlider(value: $saturation, range: 0.0 ... 1.0)
+            CustomColorSlider(value: $saturation, range: 0.0 ... 1.0)
         }
         .frame(width: UIScreen.main.bounds.size.width , height: 30)
         .padding(.horizontal)
@@ -106,7 +106,7 @@ struct CustomSliderView: View {
                 ))
                 .frame(width: UIScreen.main.bounds.size.width * 0.9, height: 30)
         
-            CustomUISlider(value: $brightness, range: 0.0 ... 1.0)
+            CustomColorSlider(value: $brightness, range: 0.0 ... 1.0)
         }
         .frame(width: UIScreen.main.bounds.size.width, height: 30)
     
@@ -116,5 +116,5 @@ struct CustomSliderView: View {
 }
 
 #Preview {
-    CustomSliderView()
+    HSLSliderView()
 }
