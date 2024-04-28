@@ -41,15 +41,12 @@ struct ContentView: View {
     var body: some View {
         HStack {
             Group {
-//                intensityView(index: 0, mode: 0, count: 1)
-//                    .scaledToFit()
                 RoundedRectangle(cornerRadius: 30.0)
                     .foregroundStyle(colors.baseColor)
                     .overlay {
-                        ZStack {
-                            Color(colors.baseColor)
-                            Text(hslToHex(hsl: backgroundColorForIndex(6, mode: 0, count: 1)))
-                        }
+                        Text(hslToHex(hsl: colors.baseColor))
+                            .font(.largeTitle).dynamicTypeSize(DynamicTypeSize.xxxLarge).bold()
+                            .foregroundStyle(.regularMaterial)
                     }
                 ////                            ObservedColorValuesView(colors: colors)
                 //                                .font(.largeTitle)
@@ -130,7 +127,13 @@ struct ContentView: View {
     private func intensityView(index: Int, mode: Int, count: Int) -> some View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0, content: {
             UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 12)
-                .background(backgroundColorForIndex(index, mode: mode, count: 12))
+                .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: count))
+//                .overlay {
+//                    ZStack {
+//                        Color(backgroundColorForIndex(index, mode: mode, count: 12))
+//                        Text(hslToHex(hsl: colors.baseColor))
+//                    }
+//                }
 //                .overlay {
 //                    Text(hslToHex(hsl: backgroundColorForIndex(12 - index, mode: mode, count: count)))
 //                        .foregroundColor(textColorForIndex(index))
@@ -145,7 +148,6 @@ struct ContentView: View {
 //                }
             
         })
-        .background(backgroundColorForIndex(index, mode: mode, count: 12))
         .frame(width: UIScreen.main.bounds.width * 0.12)
         .padding()
     }
@@ -183,13 +185,19 @@ struct ContentView: View {
         (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         
         let hslColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
-        let components = hslColor.cgColor.components!
-        var h: CGFloat = hue
-        var s: CGFloat = (mode == 0 || mode == 1) ? CGFloat(index / count) : saturation
-        var b: CGFloat = (mode == 0 || mode == 1) ? CGFloat(index / count) : brightness
-        var a: CGFloat = alpha
+        print("\(mode)")
+        print("\(index) / \(count): \(hue), \(saturation), \(brightness), \(alpha)\t\t\t\t\(CGFloat(index / count))")
         
-        return Color.init(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: a))
+        let components = hslColor.cgColor.components!
+        
+        let h: CGFloat = hue
+        let s: CGFloat = (mode == 1) ? CGFloat(Double(index) / Double(count)) : saturation
+        var b: CGFloat = (mode == 2) ? CGFloat(Double(index) / Double(count)) : brightness
+//        let a: CGFloat = 1.0 //colors.alpha
+        let finalHSLColor = UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0)
+        let returnedColor = Color(uiColor: finalHSLColor)
+        print("\(index): \(h), \(s), \(b), \(alpha)\t\t\t\t\(CGFloat(index / count))\n")
+        return returnedColor
     }
     
     private func textColorForIndex(_ index: Int) -> Color {
