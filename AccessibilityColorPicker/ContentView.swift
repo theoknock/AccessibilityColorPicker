@@ -6,25 +6,77 @@
 //
 
 import SwiftUI
+import Charts
+
+struct Intensity: Identifiable {
+    var position: Int
+    var value: Int
+    var id = UUID()
+}
 
 struct ContentView: View {
     @State var colors: ObservableColorValues
     var intensity: [String] = ["25","50","100","200","300","400", "500","600","700","800","900","950"]
     
+    
+    var intensities: [Intensity] = [
+        .init(position: 1, value: 25),
+        .init(position: 2, value: 50),
+        .init(position: 3, value: 100),
+        .init(position: 4, value: 200),
+        .init(position: 5, value: 300),
+        .init(position: 6, value: 400),
+        .init(position: 7, value: 500),
+        .init(position: 8, value: 600),
+        .init(position: 9, value: 700),
+        .init(position: 10, value: 800),
+        .init(position: 11, value: 900),
+        .init(position: 12, value: 950)]
+    
+    let images = [
+        UIImage(systemName: "h.circle") ?? UIImage(),
+        UIImage(systemName: "h.circle.fill") ?? UIImage()
+    ]
+    
     var body: some View {
         HStack {
-            VStack {
-                Group {
-                    ObservableColorValueSliderView(colors: colors, value: $colors.hue, mode: 0)
-                    ObservableColorValueSliderView(colors: colors, value: $colors.saturation, mode: 1)
-                    ObservableColorValueSliderView(colors: colors, value: $colors.brightness, mode: 2)
-                    ObservableColorValueSliderView(colors: colors, value: $colors.alpha, mode: 3)
+            Group {
+//                intensityView(index: 0, mode: 0, count: 1)
+//                    .scaledToFit()
+                //                    RoundedRectangle(cornerRadius: 12.0)
+                //                        .foregroundStyle(colors.baseColor)
+                //                        .overlay {
+                //                            Text(hslToHex(hsl: backgroundColorForIndex(0, mode: 0, count: colors.swatchCount)))
+                ////                            ObservedColorValuesView(colors: colors)
+                //                                .font(.largeTitle)
+                //                                .foregroundStyle(.regularMaterial)
+                //                        }
+                VStack {
+                    ObservableColorValueSliderView(colors: colors, value: $colors.hue, mode: 0, images: images)
+                    ObservableColorValueSliderView(colors: colors, value: $colors.saturation, mode: 1, images: images)
+                    ObservableColorValueSliderView(colors: colors, value: $colors.brightness, mode: 2, images: images)
+                    //                    ObservableColorValueSliderView(colors: colors, value: $colors.alpha, mode: 3)
+                }
+            }.padding()
+            
+            Chart {
+                ForEach(intensities) { intensity in
+                    LineMark(
+                        x: .value("\(intensity.position)", intensity.position),
+                        y: .value("\(intensity.value)", intensity.value)
+                    )
+                    PointMark(
+                        x: .value("\(intensity.position)", intensity.position),
+                        y: .value("\(intensity.value)", intensity.value)
+                    )
                 }
             }
             
-            VStack {
-                ObservedColorValuesView(colors: colors)
-            }
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 12.0)
+                .foregroundStyle(.white).opacity(0.15)
+                .foregroundStyle(.regularMaterial)
         }
         
         ScrollView(.horizontal) {
@@ -87,16 +139,16 @@ struct ContentView: View {
                 .foregroundColor(backgroundColorForIndex(index, mode: mode, count: count))
                 .overlay {
                     Text("\(intensity[index])")
-                        .font(.largeTitle)
+                    //                        .font(.largeTitle)
                         .foregroundColor(textColorForIndex(count - index))
-                        .padding(.vertical)
+                    //                        .padding(.horizontal)
                         .scaledToFill()
                 }
             UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 12, bottomTrailingRadius: 12, topTrailingRadius: 0)
                 .foregroundColor(.white)
                 .overlay {
                     Text(hslToHex(hsl: backgroundColorForIndex(index, mode: mode, count: count)))
-                        .font(.footnote)
+                        .scaledToFit()
                         .foregroundColor(textColorForIndex(index))
                         .padding(.vertical)
                 }
@@ -119,6 +171,7 @@ struct ContentView: View {
         let r: Int = Int(components[0] * 255)
         let g: Int = Int(components[1] * 255)
         let b: Int = Int(components[2] * 255)
+        let a: Int = Int(components[3] * 255)
         
         // Generate hexadecimal color string using RGB values
         let hexColor = String(format: "#%02X%02X%02X", r, g, b)
@@ -139,9 +192,9 @@ struct ContentView: View {
         let newColor: Color = {
             switch mode {
             case 0:
-                return Color.init(uiColor: UIColor(hue: hue * ((Double(index) / Double(count))), saturation: saturation, brightness: brightness, alpha: (Double(index) / Double(count))))
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha))
             case 1:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: ((Double(index) / Double(count))), brightness: brightness, alpha: alpha))
+                return Color.init(uiColor: UIColor(hue: hue, saturation: Double(index / count), brightness: brightness, alpha: alpha))
             case 2:
                 return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: ((Double(index) / Double(count))), alpha: alpha))
             case 3:

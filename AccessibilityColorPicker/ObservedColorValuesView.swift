@@ -19,8 +19,8 @@ struct ObservedColorValuesView: View {
                 Text("H \(String(format: "%.2f", colors.hue))")
                 Text("S \(String(format: "%.2f", colors.saturation))")
                 Text("B \(String(format: "%.2f", colors.brightness))")
+//                Text("A \(String(format: "%.2f", colors.alpha))")
             }
-            .font(.caption)
         })
     }
 }

@@ -13,6 +13,7 @@ struct ObservableColorValueSliderViewRepresentable: UIViewRepresentable {
     var mode: Int
     var colors: ObservableColorValues
     var range: ClosedRange<Double>
+    var images: [UIImage]
     
     func makeUIView(context: Context) -> UISlider {
         let slider = UISlider(frame: .zero)
@@ -21,6 +22,8 @@ struct ObservableColorValueSliderViewRepresentable: UIViewRepresentable {
         slider.minimumValue = Float(range.lowerBound)
         slider.maximumValue = Float(range.upperBound)
         slider.value = Float(value)
+        slider.minimumValueImage = UIImage(systemName: "h.circle")
+        slider.maximumValueImage = UIImage(systemName: "h.circle.fill")
         slider.addTarget(
             context.coordinator,
             action: #selector(Coordinator.valueChanged(_:)),
@@ -34,7 +37,7 @@ struct ObservableColorValueSliderViewRepresentable: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(ObservableColorValueSliderView(colors: colors, value: $value, mode: mode))
+        Coordinator(ObservableColorValueSliderView(colors: colors, value: $value, mode: mode, images: images))
     }
     
     class Coordinator: NSObject {
@@ -56,6 +59,7 @@ struct ObservableColorValueSliderView: View {
     @Bindable var colors: ObservableColorValues
     @Binding var value: Double
     var mode: Int
+    var images: [UIImage]
     
     
     var body: some View {
