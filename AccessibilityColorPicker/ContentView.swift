@@ -128,6 +128,8 @@ struct ContentView: View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0, content: {
             UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 12)
                 .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: count))
+            UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 12, bottomTrailingRadius: 12, topTrailingRadius: 0)
+                .foregroundStyle(backgroundColorForIndex(12 - index, mode: mode, count: count))
 //                .overlay {
 //                    ZStack {
 //                        Color(backgroundColorForIndex(index, mode: mode, count: 12))
@@ -185,18 +187,18 @@ struct ContentView: View {
         (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         
         let hslColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
-        print("\(mode)")
-        print("\(index) / \(count): \(hue), \(saturation), \(brightness), \(alpha)\t\t\t\t\(CGFloat(index / count))")
+//        print("\(mode)")
+//        print("\(index) / \(count): \(hue), \(saturation), \(brightness), \(alpha)\t\t\t\t\(CGFloat(index / count))")
         
         let components = hslColor.cgColor.components!
         
         let h: CGFloat = hue
-        let s: CGFloat = (mode == 1) ? CGFloat(Double(index) / Double(count)) : saturation
-        var b: CGFloat = (mode == 2) ? CGFloat(Double(index) / Double(count)) : brightness
+        let s: CGFloat = (mode == 0 || mode == 1) ? CGFloat(Double(index) / Double(count)) : saturation
+        var b: CGFloat = (mode == 0 || mode == 2) ? CGFloat(Double(index) / Double(count)) : brightness
 //        let a: CGFloat = 1.0 //colors.alpha
         let finalHSLColor = UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0)
         let returnedColor = Color(uiColor: finalHSLColor)
-        print("\(index): \(h), \(s), \(b), \(alpha)\t\t\t\t\(CGFloat(index / count))\n")
+//        print("\(index): \(h), \(s), \(b), \(alpha)\t\t\t\t\(CGFloat(index / count))\n")
         return returnedColor
     }
     
