@@ -8,110 +8,57 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var colors = ObservableColorValues()
+    @State var colors: ObservableColorValues
     var intensity: [String] = ["25","50","100","200","300","400", "500","600","700","800","900","950"]
-    
     
     var body: some View {
         HStack {
             VStack {
                 Group {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(UIColor(hue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
-                                    Color(UIColor(hue: 0.333, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
-                                    Color(UIColor(hue: 0.667, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
-                                    Color(UIColor(hue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0))
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).frame(height: 30)
-                        
-                        ObservableColorValueSliderView(value: $colors.hue)
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(UIColor(hue: colors.hue, saturation: 0.0, brightness: colors.brightness, alpha: 1.0)),
-                                    Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: colors.brightness, alpha: 1.0))
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).frame(height: 30)
-                        
-                        ObservableColorValueSliderView(value: $colors.saturation)
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 0.0, alpha: 1.0)),
-                                    Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: 1.0, alpha: 1.0))
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).frame(height: 30)
-                        
-                        ObservableColorValueSliderView(value: $colors.brightness)
-                    }
+                    ObservableColorValueSliderView(colors: colors, value: $colors.hue, mode: 0)
+                    ObservableColorValueSliderView(colors: colors, value: $colors.saturation, mode: 1)
+                    ObservableColorValueSliderView(colors: colors, value: $colors.brightness, mode: 2)
+                    ObservableColorValueSliderView(colors: colors, value: $colors.alpha, mode: 3)
                 }
             }
+            
             VStack {
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color(UIColor(hue: colors.hue, saturation: colors.saturation, brightness: colors.brightness, alpha: 1.0)))
-                    .frame(width: 30)
-            }
-            VStack {
-                ObservedColorValuesView()
+                ObservedColorValuesView(colors: colors)
             }
         }
         
-        //        ScrollView(.horizontal) {
-        //            HStack(alignment: .center, spacing: 0, content: {
-        //                ForEach(0..<intensity.count, id: \.self) { index in
-        //                    intensityView(index: index, value: 1)
-        //                        .scaledToFill()
-        //                    //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
-        //                    //                                .scaledToFit()
-        //                }
-        //            })
-        //        }
-        
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 0, content: {
-                ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index, mode: 0)
+                ForEach(0..<$colors.swatchCount.wrappedValue, id: \.self) { index in
+                    intensityView(index: index, mode: 0, count: colors.swatchCount)
                         .scaledToFill()
-                    //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
-                    //                                .scaledToFit()
-                }
-            })
-        }
-        
-        
-        ScrollView(.horizontal) {
-            HStack(alignment: .center, spacing: 0, content: {
-                ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index, mode: 1)
-                        .scaledToFill()
-                    //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
-                    //                                .scaledToFit()
                 }
             })
         }
         
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 0, content: {
-                ForEach(0..<intensity.count, id: \.self) { index in
-                    intensityView(index: index, mode: 2)
+                ForEach(0..<$colors.swatchCount.wrappedValue, id: \.self) { index in
+                    intensityView(index: index, mode: 1, count: colors.swatchCount)
                         .scaledToFill()
-                    //                                                .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.height / 12)
-                    //                                .scaledToFit()
+                }
+            })
+        }
+        
+        ScrollView(.horizontal) {
+            HStack(alignment: .center, spacing: 0, content: {
+                ForEach(0..<$colors.swatchCount.wrappedValue, id: \.self) { index in
+                    intensityView(index: index, mode: 2, count: colors.swatchCount)
+                        .scaledToFill()
+                }
+            })
+        }
+        
+        ScrollView(.horizontal) {
+            HStack(alignment: .center, spacing: 0, content: {
+                ForEach(0..<$colors.swatchCount.wrappedValue, id: \.self) { index in
+                    intensityView(index: index, mode: 3, count: colors.swatchCount)
+                        .scaledToFill()
                 }
             })
         }
@@ -134,38 +81,27 @@ struct ContentView: View {
     
     
     @ViewBuilder
-    private func intensityView(index: Int, mode: Int) -> some View {
-//        ZStack {
-            VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0, content: {
-                UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 12)
-                    .foregroundColor(backgroundColorForIndex((mode == 1 || mode == 2) ? index : (12 - index), mode: mode))
-                
-                UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 12, bottomTrailingRadius: 12, topTrailingRadius: 0)
-                    .foregroundColor(.white)
-                    .overlay {
-                        Text(hslToHex(hsl: backgroundColorForIndex((mode == 1 || mode == 2) ? index : (12 - index), mode: mode)))
-                            .font(.footnote)
-                            .foregroundColor(textColorForIndex(index))
-//                            .padding(.horizontal)
-                            .padding(.vertical)
-                        
-                    }
-                    
-            }).padding()
-//        }
-        
-        //                .frame(width: UIScreen.main.bounds.size.height / 12, height: UIScreen.main.bounds.size.width * 0.25 )
-        //            VStack {
-        //                //            Text(String("\(index)")
-        //                //                .foregroundColor(textColorForIndex(index))
-        //                Text(hslToHex(hsl: textColorForIndex(index))).scaledToFit()
-        //                    .font(.footnote)
-        //                    .foregroundColor(textColorForIndex(index))
-        //                    .padding(.horizontal)
-        ////                    .scaledToFill()
-        //            }
-        //            .frame(width: UIScreen.main.bounds.size.width / 12, height: UIScreen.main.bounds.size.width / 12)
-        
+    private func intensityView(index: Int, mode: Int, count: Int) -> some View {
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0, content: {
+            UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 12)
+                .foregroundColor(backgroundColorForIndex(index, mode: mode, count: count))
+                .overlay {
+                    Text("\(intensity[index])")
+                        .font(.largeTitle)
+                        .foregroundColor(textColorForIndex(count - index))
+                        .padding(.vertical)
+                        .scaledToFill()
+                }
+            UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 12, bottomTrailingRadius: 12, topTrailingRadius: 0)
+                .foregroundColor(.white)
+                .overlay {
+                    Text(hslToHex(hsl: backgroundColorForIndex(index, mode: mode, count: count)))
+                        .font(.footnote)
+                        .foregroundColor(textColorForIndex(index))
+                        .padding(.vertical)
+                }
+            
+        }).padding()
     }
     
     private func hslToHex(hsl: Color) -> String {
@@ -192,25 +128,26 @@ struct ContentView: View {
     }
     
     
-    private func backgroundColorForIndex(_ index: Int, mode: Int) -> Color {
+    private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         var alpha: CGFloat = 0
-//        var newColor: Color
         
         (UIColor(colors.baseColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         
         let newColor: Color = {
             switch mode {
             case 0:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: pow(brightness * (Double(index) / 12), (1.0/brightness))))
+                return Color.init(uiColor: UIColor(hue: hue * ((Double(index) / Double(count))), saturation: saturation, brightness: brightness, alpha: (Double(index) / Double(count))))
             case 1:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: pow(saturation * (Double(index) / 12), (1.0/saturation)), brightness: brightness, alpha: alpha))
+                return Color.init(uiColor: UIColor(hue: hue, saturation: ((Double(index) / Double(count))), brightness: brightness, alpha: alpha))
             case 2:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: ((Double(index) / Double(count))), alpha: alpha))
+            case 3:
+                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: ((Double(index) / Double(count)))))
             default:
-                return Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: pow(brightness * (Double(index) / 12), (1.0/brightness)), alpha: alpha))
+                return Color.init(uiColor: UIColor(.accentColor))
             }
         }()
         
@@ -242,9 +179,10 @@ struct ContentView: View {
         return newColor
     }
 }
-    
-    
-    #Preview {
-        ContentView()
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(colors: ObservableColorValues())
             .preferredColorScheme(.dark)
     }
+}

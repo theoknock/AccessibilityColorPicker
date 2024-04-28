@@ -76,7 +76,7 @@ struct ContentViewblah: View {
                 }
                 
                 // Column 3: TextFields
-                ObservedColorValuesView()
+                ObservedColorValuesView(colors: colors)
                 
             })
             .safeAreaPadding()

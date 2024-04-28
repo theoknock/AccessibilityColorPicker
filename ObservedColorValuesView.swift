@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Combine
+import Observation
 
 
 struct ObservedColorValuesView: View {
-    @State private var colors = ObservableColorValues()
+    @Bindable var colors: ObservableColorValues
     
     var body: some View {
         VStack(alignment: .leading, content: {
@@ -23,6 +25,6 @@ struct ObservedColorValuesView: View {
     }
 }
 
-#Preview {
-    ObservedColorValuesView()
-}
+//#Preview {
+//    ObservedColorValuesView()
+//}
