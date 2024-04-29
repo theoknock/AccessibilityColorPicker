@@ -12,6 +12,8 @@
 		B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */; };
 		B93EA6652BDD293A00992493 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6642BDD293A00992493 /* ContentView.swift */; };
 		B93EA6682BDE20C500992493 /* ColorSamplesStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6672BDE20C500992493 /* ColorSamplesStepperView.swift */; };
+		B93EA66C2BDEFF0600992493 /* LayoutPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA66B2BDEFF0600992493 /* LayoutPlayground.swift */; };
+		B95190022BDFAACB00A6F981 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = B95190012BDFAACB00A6F981 /* Algorithms */; };
 		B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */; };
 		B9DA184C2BDA3AAC008A6E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */; };
 		B9DA184F2BDA3AAC008A6E10 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184E2BDA3AAC008A6E10 /* Preview Assets.xcassets */; };
@@ -23,6 +25,7 @@
 		B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableColorValues.swift; sourceTree = "<group>"; };
 		B93EA6642BDD293A00992493 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B93EA6672BDE20C500992493 /* ColorSamplesStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSamplesStepperView.swift; sourceTree = "<group>"; };
+		B93EA66B2BDEFF0600992493 /* LayoutPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPlayground.swift; sourceTree = "<group>"; };
 		B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessibilityColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityColorPickerApp.swift; sourceTree = "<group>"; };
 		B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B95190022BDFAACB00A6F981 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				B93EA6642BDD293A00992493 /* ContentView.swift */,
+				B93EA66B2BDEFF0600992493 /* LayoutPlayground.swift */,
 				B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */,
 				B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */,
 				B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */,
@@ -95,6 +100,9 @@
 			dependencies = (
 			);
 			name = AccessibilityColorPicker;
+			packageProductDependencies = (
+				B95190012BDFAACB00A6F981 /* Algorithms */,
+			);
 			productName = AccessibilityColorPicker;
 			productReference = B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */;
 			productType = "com.apple.product-type.application";
@@ -123,6 +131,9 @@
 				Base,
 			);
 			mainGroup = B9DA183B2BDA3AAB008A6E10;
+			packageReferences = (
+				B95190002BDFAACB00A6F981 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			productRefGroup = B9DA18452BDA3AAB008A6E10 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -155,6 +166,7 @@
 				B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */,
 				B93EA6652BDD293A00992493 /* ContentView.swift in Sources */,
 				B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */,
+				B93EA66C2BDEFF0600992493 /* LayoutPlayground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B95190002BDFAACB00A6F981 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B95190012BDFAACB00A6F981 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B95190002BDFAACB00A6F981 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9DA183C2BDA3AAB008A6E10 /* Project object */;
 }

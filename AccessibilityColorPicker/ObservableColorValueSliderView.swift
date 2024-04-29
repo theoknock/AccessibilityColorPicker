@@ -57,6 +57,9 @@ struct ObservableColorValueSliderViewRepresentable: UIViewRepresentable {
 
 struct ObservableColorValueSliderView: View {
     @Bindable var colors: ObservableColorValues
+//    @Bindable var hsbComponents: BaseColor = BaseColor()
+    
+//    @Bindable var hsbColor: Color { baseColor.hsbColor }
     @Binding var value: Double
     var mode: Int
     var images: [UIImage]
@@ -64,6 +67,8 @@ struct ObservableColorValueSliderView: View {
     
     var body: some View {
         let gradientColors: [[Color]] = [
+            
+            
             // mode: 0
             [Color(UIColor(hue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
              Color(UIColor(hue: 0.333, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
@@ -71,16 +76,16 @@ struct ObservableColorValueSliderView: View {
              Color(UIColor(hue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
             
             // mode: 1
-            [Color(UIColor(hue: colors.hue, saturation: 0.0, brightness: 1.0, alpha: 1.0)),
-             Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
+            [Color(UIColor(hue: colors.baseColorModel.component(index: 0) ?? 0.5722222222, saturation: 0.0, brightness: 1.0, alpha: 1.0)),
+             Color(UIColor(hue: colors.baseColorModel.component(index: 0) ?? 0.5722222222, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
             
             // mode: 2
-            [Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: 0.0, alpha: 1.0)),
-             Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
+            [Color(UIColor(hue: colors.baseColorModel.component(index: 0) ?? 0.5722222222, saturation: 1.0, brightness: 0.0, alpha: 1.0)),
+             Color(UIColor(hue: colors.baseColorModel.component(index: 0) ?? 0.5722222222, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
             
             // mode: 3
-            [Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: 1.0, alpha: 0.0)),
-             Color(UIColor(hue: colors.hue, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
+            [Color(UIColor(hue: colors.baseColorModel.component(index: 0) ?? 0.5722222222, saturation: 1.0, brightness: 1.0, alpha: 0.0)),
+             Color(UIColor(hue: colors.baseColorModel.component(index: 0) ?? 0.5722222222, saturation: 1.0, brightness: 1.0, alpha: 1.0))],
 
             [Color(UIColor(hue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
              Color(UIColor(hue: 0.333, saturation: 1.0, brightness: 1.0, alpha: 1.0)),
@@ -96,7 +101,11 @@ struct ObservableColorValueSliderView: View {
                     endPoint: .trailing
                 )).frame(height: 30)
             
-            Slider(value: $value, in: 0.0 ... 1.0)
-        } 
+            Slider(value:
+                    (mode == 0) ? $colors.baseColorModel.hue :
+                    (mode == 1) ? $colors.baseColorModel.saturation :
+                    $colors.baseColorModel.brightness,
+                   in: 0.0 ... 1.0)
+        }
     }
 }

@@ -16,10 +16,9 @@ struct ObservedColorValuesView: View {
     var body: some View {
         VStack(alignment: .leading, content: {
             Group {
-                Text("H \(String(format: "%.2f", colors.hue))")
-                Text("S \(String(format: "%.2f", colors.saturation))")
-                Text("B \(String(format: "%.2f", colors.brightness))")
-//                Text("A \(String(format: "%.2f", colors.alpha))")
+                Text("H \(String(format: "%.2f", colors.baseColorModel.component(index: 0) ?? 0.5722222222))")
+                Text("S \(String(format: "%.2f", colors.baseColorModel.component(index: 1) ?? 1.0))")
+                Text("B \(String(format: "%.2f", colors.baseColorModel.component(index: 1) ?? 1.0))")
             }
         })
     }
