@@ -77,8 +77,8 @@ struct LayoutPlayground: View {
     // Assuming there is a method to get the background color for a given index
     private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
         let h: CGFloat = colors.baseColorModel.hue
-        let s: CGFloat = colors.baseColorModel.saturation //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
-        let b: CGFloat = (colors.baseColorModel.brightness * (1.0 - CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
+        let s: CGFloat = 1.0 //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
+        let b: CGFloat = (1.0 - (CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
        
         let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
         
