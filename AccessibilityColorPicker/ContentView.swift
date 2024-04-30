@@ -122,7 +122,7 @@ struct ContentView: View {
                 UnevenRoundedRectangle(topLeadingRadius: 12, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 12)
                     .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: count))
                 Text("Heading")
-                    .foregroundStyle(backgroundColorForIndex(index, mode: 2 - mode, count: count))
+                    .foregroundStyle(textColorForIndex(index, mode: mode, count: count))
                     .font(.largeTitle).dynamicTypeSize(.xxxLarge).bold()
             }
             UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 12, bottomTrailingRadius: 12, topTrailingRadius: 0)
@@ -214,30 +214,34 @@ struct ContentView: View {
         return finalHSLColor
     }
     
-    private func textColorForIndex(_ index: Int) -> Color {
+    private func textColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
+        let baseColor = UIColor(colors.baseColorModel.hsbColor)
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         var alpha: CGFloat = 0
-        var newColor: Color
+        baseColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+
+        // Normalize the index to a value between 0 and 1
+        let normalizedIndex = CGFloat(index) / CGFloat(count)
+        let progressFore = normalizedIndex * 2
+        let progressAft = (1.0 - normalizedIndex) * 2
         
-        //        let newIndex: Int = {
-        //            switch index {
-        //            case 5:
-        //                return 0
-        //            case 6:
-        //                return 1
-        //            case 7:
-        //                return 11
-        //            default:
-        //                return index
-        //            }
-        //        }()
-        
-        (UIColor(colors.baseColorModel.hsbColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        newColor = Color.init(uiColor: UIColor(hue: hue, saturation: saturation, brightness: (brightness + (Double(12 - index) / 12)), alpha: alpha))
+        // Calculate the transition
+        var newColor: Color = Color(hue: hue, saturation: (saturation * progressAft) * saturation, brightness: (brightness - progressFore) * brightness, opacity: 1.0)
+//        if normalizedIndex < 0.5 {
+//            // Transition from white to the original color
+//            let progress = normalizedIndex * 2 // Scale factor for the first half
+//            newColor = Color(hue: hue, saturation: saturation * progress, brightness: brightness + (1 - brightness) * (1 - progress), opacity: alpha)
+//        } else {
+//            // Transition from the original color to black
+//            let progress = (normalizedIndex - 0.5) * 2 // Scale factor for the second half
+//            newColor = Color(hue: hue, saturation: saturation * (1 - progress), brightness: brightness * (1 - progress), opacity: alpha)
+//        }
+
         return newColor
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
