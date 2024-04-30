@@ -99,14 +99,14 @@ struct ObservableColorValueSliderView: View {
                     gradient: Gradient(colors: gradientColors[mode]),
                     startPoint: .leading,
                     endPoint: .trailing
-                )).frame(width: 200, height: 30)
+                )).frame(height: 30)
             
             Slider(value:
                     (mode == 0) ? $colors.baseColorModel.hue :
                     (mode == 1) ? $colors.baseColorModel.saturation :
                     $colors.baseColorModel.brightness,
                    in: 0.0 ... 1.0)
-            .frame(width: 200, height: 30)
+            .frame(height: 30)
         }
     }
 }

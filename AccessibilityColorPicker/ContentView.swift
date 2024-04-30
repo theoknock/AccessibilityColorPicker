@@ -16,99 +16,67 @@ import SwiftUI
 
 struct ContentView: View {
     @State var colors: ObservableColorValues = ObservableColorValues()
-    //    @State var baseColor: BaseColor = BaseColor()
     var intensity: [String] = ["25","50","100","200","300","400", "500","600","700","800","900","950"]
     
-    
-//    var intensities: [Intensity] = [
-//        .init(position: 0, value: 0.0),
-//        .init(position: 1, value: 0.125),
-//        .init(position: 2, value: 0.1875),
-//        .init(position: 3, value: 0.25),
-//        .init(position: 4, value: 0.3125),
-//        .init(position: 5, value: 0.375),
-//        .init(position: 6, value: 0.5),
-//        .init(position: 7, value: 0.5625),
-//        .init(position: 8, value: 0.626),
-//        .init(position: 9, value: 0.6875),
-//        .init(position: 10, value: 0.825),
-//        .init(position: 11, value: 1.0)]
-//    
     let images = [
         UIImage(systemName: "h.circle") ?? UIImage(),
         UIImage(systemName: "h.circle.fill") ?? UIImage()
     ]
     
     var body: some View {
-        HStack {
-            Group {
-                VStack {
-                    RoundedRectangle(cornerRadius: 30.0)
-                        .foregroundStyle(colors.baseColorModel.hsbColor)
-                        .overlay {
-                            Text(hslToHex(hsl: colors.baseColorModel.hsbColor))
-                                .font(.largeTitle).dynamicTypeSize(DynamicTypeSize.xxxLarge).bold().foregroundStyle(.regularMaterial)
-                        }
-                    
-                    Spacer()
-                    ForEach(0..<3, id: \.self) { mode in
-                        ObservableColorValueSliderView(colors: colors, 
-                                                       value:
-                                                        (mode == 0) ? $colors.baseColorModel.hue :
-                                                        (mode == 1) ? $colors.baseColorModel.saturation :
-                                                        $colors.baseColorModel.brightness,
-                                                       mode: mode, 
-                                                       images: images)
-                    }
-                    Spacer()
+        VStack {
+            RoundedRectangle(cornerRadius: 30.0)
+                .foregroundStyle(colors.baseColorModel.hsbColor)
+                .overlay {
+                    Text(hslToHex(hsl: colors.baseColorModel.hsbColor))
+                        .font(.largeTitle).dynamicTypeSize(DynamicTypeSize.xxxLarge).bold().foregroundStyle(.regularMaterial)
                 }
-//                .background {
-//                    RoundedRectangle(cornerRadius: 30.0)
-//                        .foregroundStyle(.white).opacity(0.15)
-//                        .foregroundStyle(.regularMaterial)
-//                }
-                
-//                Chart {
-//                    ForEach(intensities) { intensity in
-//                        PointMark(
-//                            x: .value("\(intensity.position)", intensity.position),
-//                            y: .value("\(intensity.value)", intensity.value)
-//                        )
-//                    }
-//                }
-            }.padding()
             
+            Group {
+                ForEach(0..<3, id: \.self) { mode in
+                    ObservableColorValueSliderView(colors: colors,
+                                                   value:
+                                                    (mode == 0) ? $colors.baseColorModel.hue :
+                                                    (mode == 1) ? $colors.baseColorModel.saturation :
+                                                    $colors.baseColorModel.brightness,
+                                                   mode: mode,
+                                                   images: images)
+                }
+            }
             
-            
+            LayoutPlayground(colors: colors)
         }
+        .padding()
         .background {
             RoundedRectangle(cornerRadius: 30.0)
                 .foregroundStyle(.white).opacity(0.1)
                 .foregroundStyle(.regularMaterial)
+            
         }
         
-        LayoutPlayground(colors: colors)
-        
-//        VStack {
-//            ForEach(0..<3, id: \.self) { mode in
-//                GeometryReader { geometry in
-//                    HStack(spacing: 6) {
-//                        ForEach(0..<$colors.swatchCount.wrappedValue, id: \.self) { index in
-//                            VStack(alignment: .center, spacing: 0, content: {
-//                                ZStack {
-//                                    //                                    UnevenRoundedRectangle(topLeadingRadius: 3, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 3)
-//                                    //                                        .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: colors.swatchCount))     // intensityView(index: index, mode: mode, count: colors.swatchCount)
-//                                }
-//                                .aspectRatio(1.0, contentMode: .fit)
-//                                
-//                            })
-//                        }
-//                    }
-//                    .padding() // Adds horizontal padding
-//                }
-//            }
-//        }
     }
+    
+    
+    
+    //        VStack {
+    //            ForEach(0..<3, id: \.self) { mode in
+    //                GeometryReader { geometry in
+    //                    HStack(spacing: 6) {
+    //                        ForEach(0..<$colors.swatchCount.wrappedValue, id: \.self) { index in
+    //                            VStack(alignment: .center, spacing: 0, content: {
+    //                                ZStack {
+    //                                    //                                    UnevenRoundedRectangle(topLeadingRadius: 3, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 3)
+    //                                    //                                        .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: colors.swatchCount))     // intensityView(index: index, mode: mode, count: colors.swatchCount)
+    //                                }
+    //                                .aspectRatio(1.0, contentMode: .fit)
+    //
+    //                            })
+    //                        }
+    //                    }
+    //                    .padding() // Adds horizontal padding
+    //                }
+    //            }
+    //        }
     
     
     /*
@@ -135,11 +103,11 @@ struct ContentView: View {
         }
         .aspectRatio(1.0, contentMode: .fit)
         
-//        ZStack {
-//            UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 0)
-//                .foregroundStyle(.white)
-//        }
-//        .aspectRatio(0.5, contentMode: .fit)
+        //        ZStack {
+        //            UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 0)
+        //                .foregroundStyle(.white)
+        //        }
+        //        .aspectRatio(0.5, contentMode: .fit)
         
         //        .frame(width: UIScreen.main.bounds.width * 0.12)
         //        .padding()
@@ -170,9 +138,9 @@ struct ContentView: View {
     
     private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
         
-//        let h: CGFloat = colors.baseColorModel.hue
-//        let s: CGFloat = (mode == 1) ? min(max(colors.baseColorModel.saturation * 0.5, 0.0 + (CGFloat(Double(index) / Double(count)))), colors.baseColorModel.saturation) : colors.baseColorModel.saturation
-//        let b: CGFloat = (mode == 2) ? colors.baseColorModel.brightness * (1.0 - (CGFloat(Double(index) / Double(count)))) : colors.baseColorModel.brightness
+        //        let h: CGFloat = colors.baseColorModel.hue
+        //        let s: CGFloat = (mode == 1) ? min(max(colors.baseColorModel.saturation * 0.5, 0.0 + (CGFloat(Double(index) / Double(count)))), colors.baseColorModel.saturation) : colors.baseColorModel.saturation
+        //        let b: CGFloat = (mode == 2) ? colors.baseColorModel.brightness * (1.0 - (CGFloat(Double(index) / Double(count)))) : colors.baseColorModel.brightness
         
         let h: CGFloat = colors.baseColorModel.hue
         let s: CGFloat = colors.baseColorModel.saturation //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
@@ -182,33 +150,33 @@ struct ContentView: View {
         let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
         
         
-//
-//        
-//        var hue: CGFloat = 0
-//        var saturation: CGFloat = 0
-//        var brightness: CGFloat = 0
-//        var alpha: CGFloat = 0
-//        
-//        (UIColor(colors.baseColorModel.hsbColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-//        
-//        let hslColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
-//        let components = hslColor.cgColor.components!
-//        
-//        
-//        //        print("\(mode)")
-//        //        print("\(index) / \(count): \(hue), \(saturation), \(brightness), \(alpha)\t\t\t\t\(CGFloat(index / count))")
-//        
-//        
-//        let h: CGFloat = hue
-//        let s: CGFloat = saturation //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
-//        let b: CGFloat = brightness * (-1.0 + (CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
-//        
-//        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
-//        
-//        
-//        //        let returnedColor = Color(uiColor: finalHSLColor)
-//        //        print("\(index): \(h), \(s), \(b), \(alpha)\t\t\t\t\(CGFloat(index / count))\n")
-//        
+        //
+        //
+        //        var hue: CGFloat = 0
+        //        var saturation: CGFloat = 0
+        //        var brightness: CGFloat = 0
+        //        var alpha: CGFloat = 0
+        //
+        //        (UIColor(colors.baseColorModel.hsbColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        //
+        //        let hslColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+        //        let components = hslColor.cgColor.components!
+        //
+        //
+        //        //        print("\(mode)")
+        //        //        print("\(index) / \(count): \(hue), \(saturation), \(brightness), \(alpha)\t\t\t\t\(CGFloat(index / count))")
+        //
+        //
+        //        let h: CGFloat = hue
+        //        let s: CGFloat = saturation //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
+        //        let b: CGFloat = brightness * (-1.0 + (CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
+        //
+        //        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
+        //
+        //
+        //        //        let returnedColor = Color(uiColor: finalHSLColor)
+        //        //        print("\(index): \(h), \(s), \(b), \(alpha)\t\t\t\t\(CGFloat(index / count))\n")
+        //
         
         return finalHSLColor
     }
@@ -224,39 +192,38 @@ struct ContentView: View {
         
         return finalHSLColor
         
-//        let baseColor = UIColor(colors.baseColorModel.hsbColor)
-//        var hue: CGFloat = 0
-//        var saturation: CGFloat = 0
-//        var brightness: CGFloat = 0
-//        var alpha: CGFloat = 0
-//        baseColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-//
-//        // Normalize the index to a value between 0 and 1
-//        let normalizedIndex = CGFloat(index) / CGFloat(count)
-//        let progressFore = normalizedIndex * 2
-//        let progressAft = (1.0 - normalizedIndex) * 2
-//        
-//        // Calculate the transition
-//        var newColor: Color = Color(hue: hue, saturation: (saturation * progressAft) * saturation, brightness: (brightness - progressFore) * brightness, opacity: 1.0)
-////        if normalizedIndex < 0.5 {
-////            // Transition from white to the original color
-////            let progress = normalizedIndex * 2 // Scale factor for the first half
-////            newColor = Color(hue: hue, saturation: saturation * progress, brightness: brightness + (1 - brightness) * (1 - progress), opacity: alpha)
-////        } else {
-////            // Transition from the original color to black
-////            let progress = (normalizedIndex - 0.5) * 2 // Scale factor for the second half
-////            newColor = Color(hue: hue, saturation: saturation * (1 - progress), brightness: brightness * (1 - progress), opacity: alpha)
-////        }
-//
-//        return newColor
-    }
-
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(colors: ObservableColorValues())
-            .preferredColorScheme(.dark)
+        //        let baseColor = UIColor(colors.baseColorModel.hsbColor)
+        //        var hue: CGFloat = 0
+        //        var saturation: CGFloat = 0
+        //        var brightness: CGFloat = 0
+        //        var alpha: CGFloat = 0
+        //        baseColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        //
+        //        // Normalize the index to a value between 0 and 1
+        //        let normalizedIndex = CGFloat(index) / CGFloat(count)
+        //        let progressFore = normalizedIndex * 2
+        //        let progressAft = (1.0 - normalizedIndex) * 2
+        //
+        //        // Calculate the transition
+        //        var newColor: Color = Color(hue: hue, saturation: (saturation * progressAft) * saturation, brightness: (brightness - progressFore) * brightness, opacity: 1.0)
+        ////        if normalizedIndex < 0.5 {
+        ////            // Transition from white to the original color
+        ////            let progress = normalizedIndex * 2 // Scale factor for the first half
+        ////            newColor = Color(hue: hue, saturation: saturation * progress, brightness: brightness + (1 - brightness) * (1 - progress), opacity: alpha)
+        ////        } else {
+        ////            // Transition from the original color to black
+        ////            let progress = (normalizedIndex - 0.5) * 2 // Scale factor for the second half
+        ////            newColor = Color(hue: hue, saturation: saturation * (1 - progress), brightness: brightness * (1 - progress), opacity: alpha)
+        ////        }
+        //
+        //        return newColor
     }
 }
-     
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView(colors: ObservableColorValues())
+                .preferredColorScheme(.dark)
+        }
+    }
+    

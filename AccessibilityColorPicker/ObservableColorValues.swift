@@ -14,7 +14,7 @@ import Algorithms
 @Observable class BaseColor {
     var hue: Double        = Double(0.5722222222)
     var saturation: Double = Double(1.0)
-    var brightness: Double = Double(1.0)
+    var brightness: Double = Double(0.5)
     
     var hsbColor: Color { Color(hue: hue, saturation: saturation, brightness: brightness) }
     
