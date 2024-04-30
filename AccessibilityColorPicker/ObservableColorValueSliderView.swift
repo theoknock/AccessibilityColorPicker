@@ -16,14 +16,14 @@ struct ObservableColorValueSliderViewRepresentable: UIViewRepresentable {
     var images: [UIImage]
     
     func makeUIView(context: Context) -> UISlider {
-        let slider = UISlider(frame: .zero)
+        let slider = UISlider(frame: CGRect.zero)
         slider.minimumTrackTintColor = UIColor.clear
         slider.maximumTrackTintColor = UIColor.clear
         slider.minimumValue = Float(range.lowerBound)
         slider.maximumValue = Float(range.upperBound)
         slider.value = Float(value)
-        slider.minimumValueImage = UIImage(systemName: "h.circle")
-        slider.maximumValueImage = UIImage(systemName: "h.circle.fill")
+        slider.minimumValueImage = UIImage(named: "h.circle")
+        slider.maximumValueImage = UIImage(systemName: "h.circle")
         slider.addTarget(
             context.coordinator,
             action: #selector(Coordinator.valueChanged(_:)),
@@ -99,13 +99,14 @@ struct ObservableColorValueSliderView: View {
                     gradient: Gradient(colors: gradientColors[mode]),
                     startPoint: .leading,
                     endPoint: .trailing
-                )).frame(height: 30)
+                )).frame(width: 200, height: 30)
             
             Slider(value:
                     (mode == 0) ? $colors.baseColorModel.hue :
                     (mode == 1) ? $colors.baseColorModel.saturation :
                     $colors.baseColorModel.brightness,
                    in: 0.0 ... 1.0)
+            .frame(width: 200, height: 30)
         }
     }
 }
