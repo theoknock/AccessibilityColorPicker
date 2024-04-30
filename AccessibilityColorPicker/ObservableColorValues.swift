@@ -18,7 +18,7 @@ import Algorithms
     
     var hsbColor: Color { Color(hue: hue, saturation: saturation, brightness: brightness) }
     
-    init(hue: Double = 0.5722222222, saturation: Double = 1.0, brightness: Double = 1.0) {
+    init(hue: Double = 0.5722222222, saturation: Double = 1.0, brightness: Double = 0.5) {
         self.hue = hue
         self.saturation = saturation
         self.brightness = brightness

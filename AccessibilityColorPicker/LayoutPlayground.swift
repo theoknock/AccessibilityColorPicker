@@ -31,20 +31,7 @@ struct LayoutPlayground: View {
                     HStack(spacing: 6) {
                         ForEach(1...colors.swatchCount, id: \.self) { index in
                             VStack(alignment: .center, spacing: 0) {
-                                ZStack {
-                                    UnevenRoundedRectangle(topLeadingRadius: 3, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 3)
-                                        .fill(backgroundColorForIndex(index, mode: mode, count: colors.swatchCount))
-                                        .aspectRatio(1.0, contentMode: .fit)
-                                        .scaleEffect(selectedRectangle == index ? 3 : 1)  // Scale up if selected
-                                        .animation(.default, value: selectedRectangle)  // Animate the scaling
-                                        .onTapGesture {
-                                            self.selectedRectangle = index  // Set the selected rectangle on tap
-                                        }
-                                        .gesture(
-                                            DragGesture(minimumDistance: 0)  // Drag gesture with zero minimum distance
-                                                .onChanged { _ in self.selectedRectangle = index }
-                                        )
-                                }
+                                intensityView(index: index, mode: mode, count: colors.swatchCount)
                             }
                         }
                     }
@@ -68,11 +55,36 @@ struct LayoutPlayground: View {
         .frame(width: UIScreen.main.bounds.width) // Set a fixed height or adjust as needed
     }
     
-    // Assuming there is a method to get the background color for a given index
-    func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
-        // Return color based on index, mode, and count
-        return Color.blue // Placeholder
+    @ViewBuilder
+    private func intensityView(index: Int, mode: Int, count: Int) -> some View {
+        ZStack {
+            UnevenRoundedRectangle(topLeadingRadius: 3, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 3)
+                .aspectRatio(1.0, contentMode: .fit)
+                .scaleEffect(selectedRectangle == index ? 3 : 1)  // Scale up if selected
+                .animation(.default, value: selectedRectangle)  // Animate the scaling
+                .onTapGesture {
+                    self.selectedRectangle = index  // Set the selected rectangle on tap
+                }
+                .gesture(
+                    DragGesture(minimumDistance: 0)  // Drag gesture with zero minimum distance
+                        .onChanged { _ in self.selectedRectangle = index }
+                )
+                .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: colors.swatchCount))
+        }
     }
+    
+    
+    // Assuming there is a method to get the background color for a given index
+    private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
+        let h: CGFloat = colors.baseColorModel.hue
+        let s: CGFloat = colors.baseColorModel.saturation //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
+        let b: CGFloat = (colors.baseColorModel.brightness * (1.0 - CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
+       
+        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
+        
+        return finalHSLColor
+    }
+    
 }
 
 struct LayoutPlayground_Previews: PreviewProvider {
