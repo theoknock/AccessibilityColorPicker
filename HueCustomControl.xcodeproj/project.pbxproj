@@ -3,86 +3,66 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B93EA65D2BDC7FCB00992493 /* ObservedColorValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */; };
-		B93EA65F2BDC80CF00992493 /* ObservableColorValueSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */; };
-		B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */; };
-		B93EA6652BDD293A00992493 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6642BDD293A00992493 /* ContentView.swift */; };
-		B93EA6682BDE20C500992493 /* ColorSamplesStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA6672BDE20C500992493 /* ColorSamplesStepperView.swift */; };
-		B93EA66C2BDEFF0600992493 /* LayoutPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93EA66B2BDEFF0600992493 /* LayoutPlayground.swift */; };
-		B95190022BDFAACB00A6F981 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = B95190012BDFAACB00A6F981 /* Algorithms */; };
-		B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */; };
-		B9DA184C2BDA3AAC008A6E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */; };
-		B9DA184F2BDA3AAC008A6E10 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DA184E2BDA3AAC008A6E10 /* Preview Assets.xcassets */; };
-		B9DDA6002BE100AA008370FF /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDA5FF2BE100AA008370FF /* SwiftUIView.swift */; };
+		B9DDA60E2BE3653B008370FF /* HueCustomControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDA60D2BE3653B008370FF /* HueCustomControlApp.swift */; };
+		B9DDA6102BE3653B008370FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDA60F2BE3653B008370FF /* ContentView.swift */; };
+		B9DDA6122BE3653E008370FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DDA6112BE3653E008370FF /* Assets.xcassets */; };
+		B9DDA6152BE3653E008370FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DDA6142BE3653E008370FF /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedColorValuesView.swift; sourceTree = "<group>"; };
-		B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableColorValueSliderView.swift; sourceTree = "<group>"; };
-		B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableColorValues.swift; sourceTree = "<group>"; };
-		B93EA6642BDD293A00992493 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B93EA6672BDE20C500992493 /* ColorSamplesStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSamplesStepperView.swift; sourceTree = "<group>"; };
-		B93EA66B2BDEFF0600992493 /* LayoutPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPlayground.swift; sourceTree = "<group>"; };
-		B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessibilityColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityColorPickerApp.swift; sourceTree = "<group>"; };
-		B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B9DA184E2BDA3AAC008A6E10 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B9DDA5FF2BE100AA008370FF /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		B9DDA60A2BE3653B008370FF /* HueCustomControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueCustomControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9DDA60D2BE3653B008370FF /* HueCustomControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueCustomControlApp.swift; sourceTree = "<group>"; };
+		B9DDA60F2BE3653B008370FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B9DDA6112BE3653E008370FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9DDA6142BE3653E008370FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B9DA18412BDA3AAB008A6E10 /* Frameworks */ = {
+		B9DDA6072BE3653B008370FF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B95190022BDFAACB00A6F981 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B9DA183B2BDA3AAB008A6E10 = {
+		B9DDA6012BE3653B008370FF = {
 			isa = PBXGroup;
 			children = (
-				B9DA18462BDA3AAB008A6E10 /* AccessibilityColorPicker */,
-				B9DA18452BDA3AAB008A6E10 /* Products */,
+				B9DDA60C2BE3653B008370FF /* HueCustomControl */,
+				B9DDA60B2BE3653B008370FF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B9DA18452BDA3AAB008A6E10 /* Products */ = {
+		B9DDA60B2BE3653B008370FF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */,
+				B9DDA60A2BE3653B008370FF /* HueCustomControl.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B9DA18462BDA3AAB008A6E10 /* AccessibilityColorPicker */ = {
+		B9DDA60C2BE3653B008370FF /* HueCustomControl */ = {
 			isa = PBXGroup;
 			children = (
-				B9DDA5FF2BE100AA008370FF /* SwiftUIView.swift */,
-				B93EA6642BDD293A00992493 /* ContentView.swift */,
-				B93EA66B2BDEFF0600992493 /* LayoutPlayground.swift */,
-				B93EA6622BDCE3B600992493 /* ObservableColorValues.swift */,
-				B93EA65C2BDC7FCB00992493 /* ObservedColorValuesView.swift */,
-				B9DA18472BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift */,
-				B93EA6672BDE20C500992493 /* ColorSamplesStepperView.swift */,
-				B93EA65E2BDC80CF00992493 /* ObservableColorValueSliderView.swift */,
-				B9DA184B2BDA3AAC008A6E10 /* Assets.xcassets */,
-				B9DA184D2BDA3AAC008A6E10 /* Preview Content */,
+				B9DDA60D2BE3653B008370FF /* HueCustomControlApp.swift */,
+				B9DDA60F2BE3653B008370FF /* ContentView.swift */,
+				B9DDA6112BE3653E008370FF /* Assets.xcassets */,
+				B9DDA6132BE3653E008370FF /* Preview Content */,
 			);
-			path = AccessibilityColorPicker;
+			path = HueCustomControl;
 			sourceTree = "<group>";
 		};
-		B9DA184D2BDA3AAC008A6E10 /* Preview Content */ = {
+		B9DDA6132BE3653E008370FF /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				B9DA184E2BDA3AAC008A6E10 /* Preview Assets.xcassets */,
+				B9DDA6142BE3653E008370FF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -90,94 +70,82 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B9DA18432BDA3AAB008A6E10 /* AccessibilityColorPicker */ = {
+		B9DDA6092BE3653B008370FF /* HueCustomControl */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B9DA18522BDA3AAC008A6E10 /* Build configuration list for PBXNativeTarget "AccessibilityColorPicker" */;
+			buildConfigurationList = B9DDA6182BE3653E008370FF /* Build configuration list for PBXNativeTarget "HueCustomControl" */;
 			buildPhases = (
-				B9DA18402BDA3AAB008A6E10 /* Sources */,
-				B9DA18412BDA3AAB008A6E10 /* Frameworks */,
-				B9DA18422BDA3AAB008A6E10 /* Resources */,
+				B9DDA6062BE3653B008370FF /* Sources */,
+				B9DDA6072BE3653B008370FF /* Frameworks */,
+				B9DDA6082BE3653B008370FF /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = AccessibilityColorPicker;
-			packageProductDependencies = (
-				B95190012BDFAACB00A6F981 /* Algorithms */,
-			);
-			productName = AccessibilityColorPicker;
-			productReference = B9DA18442BDA3AAB008A6E10 /* AccessibilityColorPicker.app */;
+			name = HueCustomControl;
+			productName = HueCustomControl;
+			productReference = B9DDA60A2BE3653B008370FF /* HueCustomControl.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B9DA183C2BDA3AAB008A6E10 /* Project object */ = {
+		B9DDA6022BE3653B008370FF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					B9DA18432BDA3AAB008A6E10 = {
+					B9DDA6092BE3653B008370FF = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
-			buildConfigurationList = B9DA183F2BDA3AAB008A6E10 /* Build configuration list for PBXProject "AccessibilityColorPicker" */;
-			compatibilityVersion = "Xcode 15.3";
+			buildConfigurationList = B9DDA6052BE3653B008370FF /* Build configuration list for PBXProject "HueCustomControl" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = B9DA183B2BDA3AAB008A6E10;
-			packageReferences = (
-				B95190002BDFAACB00A6F981 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-			);
-			productRefGroup = B9DA18452BDA3AAB008A6E10 /* Products */;
+			mainGroup = B9DDA6012BE3653B008370FF;
+			productRefGroup = B9DDA60B2BE3653B008370FF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B9DA18432BDA3AAB008A6E10 /* AccessibilityColorPicker */,
+				B9DDA6092BE3653B008370FF /* HueCustomControl */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B9DA18422BDA3AAB008A6E10 /* Resources */ = {
+		B9DDA6082BE3653B008370FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9DA184F2BDA3AAC008A6E10 /* Preview Assets.xcassets in Resources */,
-				B9DA184C2BDA3AAC008A6E10 /* Assets.xcassets in Resources */,
+				B9DDA6152BE3653E008370FF /* Preview Assets.xcassets in Resources */,
+				B9DDA6122BE3653E008370FF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B9DA18402BDA3AAB008A6E10 /* Sources */ = {
+		B9DDA6062BE3653B008370FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B93EA65F2BDC80CF00992493 /* ObservableColorValueSliderView.swift in Sources */,
-				B93EA65D2BDC7FCB00992493 /* ObservedColorValuesView.swift in Sources */,
-				B9DDA6002BE100AA008370FF /* SwiftUIView.swift in Sources */,
-				B93EA6682BDE20C500992493 /* ColorSamplesStepperView.swift in Sources */,
-				B9DA18482BDA3AAB008A6E10 /* AccessibilityColorPickerApp.swift in Sources */,
-				B93EA6652BDD293A00992493 /* ContentView.swift in Sources */,
-				B93EA6632BDCE3B600992493 /* ObservableColorValues.swift in Sources */,
-				B93EA66C2BDEFF0600992493 /* LayoutPlayground.swift in Sources */,
+				B9DDA6102BE3653B008370FF /* ContentView.swift in Sources */,
+				B9DDA60E2BE3653B008370FF /* HueCustomControlApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B9DA18502BDA3AAC008A6E10 /* Debug */ = {
+		B9DDA6162BE3653E008370FF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -240,7 +208,7 @@
 			};
 			name = Debug;
 		};
-		B9DA18512BDA3AAC008A6E10 /* Release */ = {
+		B9DDA6172BE3653E008370FF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -296,14 +264,14 @@
 			};
 			name = Release;
 		};
-		B9DA18532BDA3AAC008A6E10 /* Debug */ = {
+		B9DDA6192BE3653E008370FF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AccessibilityColorPicker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"HueCustomControl/Preview Content\"";
 				DEVELOPMENT_TEAM = N9987K9442;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -317,7 +285,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bush.alan.james.AccessibilityColorPicker.AccessibilityColorPicker;
+				PRODUCT_BUNDLE_IDENTIFIER = bush.alan.james.AccessibilityColorPicker.HueCustomControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -325,14 +293,14 @@
 			};
 			name = Debug;
 		};
-		B9DA18542BDA3AAC008A6E10 /* Release */ = {
+		B9DDA61A2BE3653E008370FF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AccessibilityColorPicker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"HueCustomControl/Preview Content\"";
 				DEVELOPMENT_TEAM = N9987K9442;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -346,7 +314,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bush.alan.james.AccessibilityColorPicker.AccessibilityColorPicker;
+				PRODUCT_BUNDLE_IDENTIFIER = bush.alan.james.AccessibilityColorPicker.HueCustomControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -357,44 +325,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B9DA183F2BDA3AAB008A6E10 /* Build configuration list for PBXProject "AccessibilityColorPicker" */ = {
+		B9DDA6052BE3653B008370FF /* Build configuration list for PBXProject "HueCustomControl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B9DA18502BDA3AAC008A6E10 /* Debug */,
-				B9DA18512BDA3AAC008A6E10 /* Release */,
+				B9DDA6162BE3653E008370FF /* Debug */,
+				B9DDA6172BE3653E008370FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B9DA18522BDA3AAC008A6E10 /* Build configuration list for PBXNativeTarget "AccessibilityColorPicker" */ = {
+		B9DDA6182BE3653E008370FF /* Build configuration list for PBXNativeTarget "HueCustomControl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B9DA18532BDA3AAC008A6E10 /* Debug */,
-				B9DA18542BDA3AAC008A6E10 /* Release */,
+				B9DDA6192BE3653E008370FF /* Debug */,
+				B9DDA61A2BE3653E008370FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B95190002BDFAACB00A6F981 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B95190012BDFAACB00A6F981 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B95190002BDFAACB00A6F981 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = B9DA183C2BDA3AAB008A6E10 /* Project object */;
+	rootObject = B9DDA6022BE3653B008370FF /* Project object */;
 }

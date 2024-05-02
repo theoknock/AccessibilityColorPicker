@@ -15,7 +15,7 @@ import SwiftUI
 //}
 
 struct ContentView: View {
-    @State var colors: ObservableColorValues = ObservableColorValues()
+    @State var colors: ObservableColorValues
     var intensity: [String] = ["25","50","100","200","300","400", "500","600","700","800","900","950"]
     
     let images = [
@@ -44,7 +44,7 @@ struct ContentView: View {
                 }
             }
             
-            LayoutPlayground(colors: colors)
+            LayoutPlayground(baseColor: colors.baseColorModel)
         }
         .padding()
         .background {
@@ -99,7 +99,7 @@ struct ContentView: View {
         
         ZStack {
             UnevenRoundedRectangle(topLeadingRadius: 3, bottomLeadingRadius: 3, bottomTrailingRadius: 3, topTrailingRadius: 3)
-                .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: count))
+                .foregroundStyle(colors.baseColorModel.backgroundColorForIndex(index, mode: mode, count: count))
         }
         .aspectRatio(1.0, contentMode: .fit)
         
@@ -136,50 +136,6 @@ struct ContentView: View {
     }
     
     
-    private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
-        
-        //        let h: CGFloat = colors.baseColorModel.hue
-        //        let s: CGFloat = (mode == 1) ? min(max(colors.baseColorModel.saturation * 0.5, 0.0 + (CGFloat(Double(index) / Double(count)))), colors.baseColorModel.saturation) : colors.baseColorModel.saturation
-        //        let b: CGFloat = (mode == 2) ? colors.baseColorModel.brightness * (1.0 - (CGFloat(Double(index) / Double(count)))) : colors.baseColorModel.brightness
-        
-        let h: CGFloat = colors.baseColorModel.hue
-        let s: CGFloat = 1.0 //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
-        let b: CGFloat = colors.scale(oldMin: 1.0, oldMax: 0.0, value: 1.0 - (CGFloat(Double(index) / Double(count))), newMin: 0.0, newMax: 1.0)
-        //
-        
-        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
-        
-        
-        //
-        //
-        //        var hue: CGFloat = 0
-        //        var saturation: CGFloat = 0
-        //        var brightness: CGFloat = 0
-        //        var alpha: CGFloat = 0
-        //
-        //        (UIColor(colors.baseColorModel.hsbColor)).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        //
-        //        let hslColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
-        //        let components = hslColor.cgColor.components!
-        //
-        //
-        //        //        print("\(mode)")
-        //        //        print("\(index) / \(count): \(hue), \(saturation), \(brightness), \(alpha)\t\t\t\t\(CGFloat(index / count))")
-        //
-        //
-        //        let h: CGFloat = hue
-        //        let s: CGFloat = saturation //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
-        //        let b: CGFloat = brightness * (-1.0 + (CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
-        //
-        //        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
-        //
-        //
-        //        //        let returnedColor = Color(uiColor: finalHSLColor)
-        //        //        print("\(index): \(h), \(s), \(b), \(alpha)\t\t\t\t\(CGFloat(index / count))\n")
-        //
-        
-        return finalHSLColor
-    }
     
     private func textColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
         

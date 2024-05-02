@@ -10,8 +10,9 @@ struct Intensity: Identifiable {
 
 struct LayoutPlayground: View {
     @State private var selectedRectangle: Int? = nil  // State to track the selected rectangle
-    var colors: ObservableColorValues // Assuming 'Colors' is a type that provides a `swatchCount` and a method to determine the color
+    @State var baseColor: BaseColor
     
+   
     //    var numbers = Array(1...12)
     //    let step: Double = (0.94 - 0.06) / 11
     //    var normalizedNumbers = (0..<12).map { 0.06 + Double($0) * step }
@@ -29,9 +30,9 @@ struct LayoutPlayground: View {
             ForEach(0..<3, id: \.self) { mode in
                 VStack {
                     HStack(spacing: 6) {
-                        ForEach(1...colors.swatchCount, id: \.self) { index in
+                        ForEach(1...12, id: \.self) { index in
                             VStack(alignment: .center, spacing: 0) {
-                                intensityView(index: index, mode: mode, count: colors.swatchCount)
+                                intensityView(index: index, mode: mode, count: 12)
                             }
                         }
                     }
@@ -69,27 +70,27 @@ struct LayoutPlayground: View {
                     DragGesture(minimumDistance: 0)  // Drag gesture with zero minimum distance
                         .onChanged { _ in self.selectedRectangle = index }
                 )
-                .foregroundStyle(backgroundColorForIndex(index, mode: mode, count: colors.swatchCount))
+                .foregroundStyle(baseColor.backgroundColorForIndex(index, mode: mode, count: 12))
         }
     }
     
     
     // Assuming there is a method to get the background color for a given index
-    private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
-        let h: CGFloat = colors.baseColorModel.hue
-        let s: CGFloat = 1.0 //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
-        let b: CGFloat = (1.0 - (CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
-       
-        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
-        
-        return finalHSLColor
-    }
+//    private func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
+//        let h: CGFloat = baseColor.hue
+//        let s: CGFloat = 1.0 //colors.scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.857)
+//        let b: CGFloat = (1.0 - (CGFloat(Double(index) / Double(count)))) //colors.scale(oldMin: 1.0, oldMax: 0.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.125, newMax: 0.875)
+//       
+//        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
+//        
+//        return finalHSLColor
+//    }
     
 }
 
 struct LayoutPlayground_Previews: PreviewProvider {
     static var previews: some View {
-        LayoutPlayground(colors: ObservableColorValues()) // Replace Colors() with your actual data structure or data
+        LayoutPlayground(baseColor: BaseColor()) // Replace Colors() with your actual data structure or data
     }
 }
 

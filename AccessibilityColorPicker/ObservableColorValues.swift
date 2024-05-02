@@ -2,7 +2,7 @@
 //  ColorsObservableValues.swift
 //  AccessibilityColorPicker
 //
-//  Created by Xcode Developer on 4/26/24.
+//  Created by Xcode Developer on 4/26/24.var <#variable name#>: <#type#> {
 //
 
 import Foundation
@@ -16,14 +16,23 @@ import Algorithms
     var saturation: Double = Double(1.0)
     var brightness: Double = Double(1.0)
     
-    var hsbColor: Color { Color(hue: hue, saturation: saturation, brightness: brightness) }
+    var hsbColor: Color {
+        get {
+            return Color(hue: hue, saturation: saturation, brightness: brightness)
+        }
+        set {
+            var color: Color = Color.init(newValue)
+            self.hue = colo
+        }
+    }
     
-    init(hue: Double = 0.5722222222, saturation: Double = 1.0, brightness: Double = 0.5) {
+    init(hue: Double, saturation: Double, brightness: Double) {
         self.hue = hue
         self.saturation = saturation
         self.brightness = brightness
+//        self.hsbColor { Color(hue: hue, saturation: saturation, brightness: brightness) }
     }
-
+    
     func component(index: Int) -> Double? {
         switch index {
         case 0: return self.hue
@@ -32,8 +41,25 @@ import Algorithms
         default: return nil
         }
     }
+    
+    func scale(oldMin: Double, oldMax: Double, value: Double, newMin: Double, newMax: Double) -> Double {
+        guard
+            oldMax != oldMin
+        else {
+            return value
+        }
+        return newMin + (newMax - newMin) * (value - oldMin) / (oldMax - oldMin) }
+    
+    func backgroundColorForIndex(_ index: Int, mode: Int, count: Int) -> Color {
+        let h: CGFloat = 0.5557
+        let s: CGFloat = 0.0 + (1.0 - 0.0) * ((CGFloat(Double(index) / Double(count))) - 0.0) / (1.0 - 0.0) // scale(oldMin: 0.0, oldMax: 1.0, value: (CGFloat(Double(index) / Double(count))), newMin: 0.0, newMax: 1.0)
+        let b: CGFloat = 0.0 + (1.0 - 0.0) * (1.0 - (CGFloat(Double(index) / Double(count))) - 0.0) / (1.0 - 0.0) //scale(oldMin: 0.0, oldMax: 1.0, value: 1.0 - (CGFloat(Double(index) / Double(count))), newMin: 0.0, newMax: 1.0)
+        
+        let finalHSLColor = Color(uiColor: UIColor(hue: h, saturation: s, brightness: b, alpha: 1.0))
+        
+        return finalHSLColor
+    }
 }
-
 
 @Observable
 class ObservableColorValues {
@@ -42,18 +68,18 @@ class ObservableColorValues {
     //      HSL  206, 100, 100
     //      HSL+ 0.5722222222, 1.0, 1.0
     
-//    var hue: Double        = Double(0.5722222222)
-//    var saturation: Double = Double(1.0)
-//    var brightness: Double = Double(1.0)
-//    var alpha: Double = Double(1.0)
-    var baseColorModel: BaseColor = BaseColor()
+    var hue: Double        = Double(0.5722222222)
+    var saturation: Double = Double(1.0)
+    var brightness: Double = Double(1.0)
+    var alpha: Double = Double(1.0)
+    var baseColorModel: BaseColor = BaseColor(hue: hue, saturation: saturation, brightness: brightness)
     //var baseColor: Color { Color(hue: hue, saturation: saturation, brightness: brightness) }// { Color(hue: hue, saturation: saturation, brightness: brightness) }
-
-//    var hsbCycle: CycledSequence<Array<Double>> { Array(arrayLiteral: self.hue, self.saturation, self.brightness).cycled() }
-//    var hsbIterator: CycledSequence<Array<Double>>.Iterator { hsbCycle.makeIterator() }
+    
+    //    var hsbCycle: CycledSequence<Array<Double>> { Array(arrayLiteral: self.hue, self.saturation, self.brightness).cycled() }
+    //    var hsbIterator: CycledSequence<Array<Double>>.Iterator { hsbCycle.makeIterator() }
     
     
-//    var baseColor: Color { Color(hue: hue, saturation: saturation, brightness: brightness) }
+    //    var baseColor: Color { Color(hue: hue, saturation: saturation, brightness: brightness) }
     
     var normalizedRange: ClosedRange<Double> = Double.zero...1.0
     var swatchRange: ClosedRange<Int> = Int.zero...12
@@ -75,13 +101,12 @@ class ObservableColorValues {
             return value
         }
         return newMin + (newMax - newMin) * (value - oldMin) / (oldMax - oldMin) }
-    }
     
     
-//    func interpolate(data: [Double], base: Color) -> [Color] {
-//        guard let oldMin = data.min(), let oldMax = data.max(), oldMax != oldMin else { return data }
-//        return data.map { newMin + (newMax - newMin) * ($0 - oldMin) / (oldMax - oldMin) }
-//    }
+    //    func interpolate(data: [Double], base: Color) -> [Color] {
+    //        guard let oldMin = data.min(), let oldMax = data.max(), oldMax != oldMin else { return data }
+    //        return data.map { newMin + (newMax - newMin) * ($0 - oldMin) / (oldMax - oldMin) }
+    //    }
     
     func interpolateHSBColor(from color1: UIColor, to color2: UIColor, fraction: CGFloat) -> UIColor {
         var h1: CGFloat = 0, s1: CGFloat = 0, b1: CGFloat = 0, a1: CGFloat = 0
@@ -97,7 +122,7 @@ class ObservableColorValues {
         
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
-
+    
     func generateHSBColorSwatch(baseColor: UIColor, darkColor: UIColor, lightColor: UIColor) -> [UIColor] {
         var colors = [UIColor]()
         
